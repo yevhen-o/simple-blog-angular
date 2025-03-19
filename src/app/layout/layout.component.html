@@ -1,0 +1,17 @@
+<div class="app-layout">
+  <header class="app-header">
+    <div class="logo">My Blog</div>
+    <nav>
+      <ul>
+        <li><a routerLink="/first-component">First</a></li>
+        <li><a routerLink="/second-component">Second</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="app-main">
+    <router-outlet />
+  </main>
+  <footer class="app-footer">
+    <p>&copy; {{ currentYear }} My Blog</p>
+  </footer>
+</div>
