@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ListWrapperComponent } from '@src/app/components/list-wrapper/list-wrapper.component';
 import { BlogItemComponent } from '@src/app/features/blog/blog-item/blog-item.component';
-import { getBlogPosts } from '@src/app/services';
+import { BlogService } from '@src/app/services/blog.service';
 import { PostInterface } from '@src/app/types/PostInterface';
 import { CommonModule } from '@angular/common';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  RouterStateSnapshot,
+} from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -12,24 +18,40 @@ import { CommonModule } from '@angular/common';
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss',
 })
-export class BlogComponent implements OnInit {
-  posts: PostInterface[] = [];
+export class BlogComponent {
+  blogService = inject(BlogService);
+  private route = inject(ActivatedRoute);
   isLoading = false;
   error: string | null = null;
+  posts: PostInterface[] = [];
 
-  async ngOnInit() {
+  ngOnInit() {
     this.isLoading = true;
-    try {
-      const posts = await getBlogPosts();
-      if (posts) {
-        this.posts = posts as unknown as PostInterface[];
-      } else {
-        this.error = 'No posts found.';
-      }
-    } catch (e: any) {
-      this.error = e.message || 'Failed to load blog posts.';
-    } finally {
-      this.isLoading = false;
-    }
+    this.route.data.subscribe({
+      next: (data) => {
+        this.posts = data['posts'];
+        this.isLoading = false;
+      },
+      error: (e) => {
+        this.error = e.message || 'Failed to load blog posts.';
+        this.isLoading = false;
+      },
+    });
   }
 }
+
+export const resolveBlogPosts: ResolveFn<
+  Promise<PostInterface[] | null>
+> = async (
+  activatedRoute: ActivatedRouteSnapshot,
+  routerState: RouterStateSnapshot
+) => {
+  const blogService = inject(BlogService);
+  try {
+    const posts = await blogService.getBlogPosts();
+    return posts;
+  } catch (error) {
+    console.error('Error fetching blog posts in resolver:', error);
+    return null;
+  }
+};

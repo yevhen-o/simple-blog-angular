@@ -8,6 +8,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "dev:ssr": "ng run my-blog-angular:serve-ssr",
+    "serve:ssr": "node dist/my-blog-angular/server/server.mjs",
+    "build:ssr": "ng build && ng run my-blog-angular:server",
+    "prerender": "ng run my-blog-angular:prerender",
     "serve:ssr:my-blog-angular": "node dist/my-blog-angular/server/server.mjs"
   },
   "private": true,
