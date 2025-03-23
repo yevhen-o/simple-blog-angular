@@ -1,0 +1,38 @@
+<div class="blog-article__wrapper">
+  <app-back-button-heading>{{ article.title }}</app-back-button-heading>
+
+  <article>{{ article.content }}</article>
+  <div class="blog-article__details-wrapper">
+    <img
+      *ngIf="article.image_url"
+      [src]="article.image_url"
+      [alt]="article.title"
+    />
+    <div>
+      <div class="blog-article__author">
+        <small>Author: </small>
+        {{ article.author?.first_name }} {{ article.author?.last_name }}
+      </div>
+      <app-tag-list [tags]="article.tags"></app-tag-list>
+      <div class="blog-article__details">
+        <h5>Details</h5>
+        <div>
+          Count of commas:
+          {{
+            article.countCommas !== undefined && article.countCommas !== null
+              ? article.countCommas
+              : countCommasFn(article.content)
+          }}
+        </div>
+        <div>
+          Count of dots:
+          {{
+            article.countDots !== undefined && article.countDots !== null
+              ? article.countDots
+              : countDotsFn(article.content)
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

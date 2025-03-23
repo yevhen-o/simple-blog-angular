@@ -1,0 +1,20 @@
+.blog-article {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-df);
+  }
+
+  &__author {
+    color: var(--color-gray-75);
+  }
+
+  &__details-wrapper {
+    display: flex;
+    gap: var(--spacer-df);
+
+    img {
+      max-height: 150px;
+    }
+  }
+}

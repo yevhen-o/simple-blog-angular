@@ -1,0 +1,15 @@
+.bb-heading__wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-df);
+
+  &>a {
+    color: var(--color-gray-75);
+    cursor: pointer;
+
+    &:hover {
+      transition: all .3s;
+      transform: translate(-4px, 0);
+    }
+  }
+}
