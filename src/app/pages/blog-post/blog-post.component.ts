@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { ListWrapperComponent } from '@src/app/components/list-wrapper/list-wrapper.component';
 import { BlogService } from '@src/app/services/blog.service';
 import { PostInterface } from '@src/app/types/PostInterface';
 import { CommonModule } from '@angular/common';
@@ -14,12 +13,11 @@ import { BlogArticleComponent } from '@src/app/features/blog/blog-article/blog-a
 @Component({
   selector: 'app-blog-post',
   standalone: true,
-  imports: [ListWrapperComponent, BlogArticleComponent, CommonModule],
+  imports: [BlogArticleComponent, CommonModule],
   templateUrl: './blog-post.component.html',
   styleUrl: './blog-post.component.scss',
 })
 export class BlogPostComponent {
-  blogService = inject(BlogService);
   private route = inject(ActivatedRoute);
   isLoading = false;
   error: string | null = null;

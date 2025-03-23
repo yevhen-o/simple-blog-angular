@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostInterface } from '../../../types/PostInterface';
-import { getUrl, IDENTIFIERS } from '../../../utils';
-import { TagListComponent } from '../../../components/tag-list/tag-list.component';
+import { PostInterface } from '@src/app/types/PostInterface';
+import { getUrl, IDENTIFIERS } from '@src/app/utils';
+import { TagListComponent } from '@src/app/components/tag-list/tag-list.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

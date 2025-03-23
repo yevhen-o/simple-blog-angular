@@ -1,0 +1,8 @@
+<div *ngIf="!isLoading && !error && user">
+  <app-back-button-heading>{{ user.name }}</app-back-button-heading>
+  <div>Email: {{ user.email }}</div>
+  <div>Username: {{ user.username }}</div>
+</div>
+<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+<div *ngIf="!isLoading && !error && !user">No user found.</div>

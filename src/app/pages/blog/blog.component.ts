@@ -19,7 +19,6 @@ import {
   styleUrl: './blog.component.scss',
 })
 export class BlogComponent {
-  blogService = inject(BlogService);
   private route = inject(ActivatedRoute);
   isLoading = false;
   error: string | null = null;

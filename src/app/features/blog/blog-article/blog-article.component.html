@@ -11,7 +11,7 @@
     <div>
       <div class="blog-article__author">
         <small>Author: </small>
-        {{ article.author?.first_name }} {{ article.author?.last_name }}
+        {{ article.author.first_name }} {{ article.author.last_name }}
       </div>
       <app-tag-list [tags]="article.tags"></app-tag-list>
       <div class="blog-article__details">

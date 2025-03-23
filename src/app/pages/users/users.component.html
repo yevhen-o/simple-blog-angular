@@ -1,0 +1,12 @@
+<h1>List of users</h1>
+<a [routerLink]="getUrl(IDENTIFIERS.USER_ADD)">Add new user</a>
+<br />
+<br />
+<app-list-wrapper>
+  <div *ngFor="let user of users" class="user-item">
+    <a [routerLink]="getUrl(IDENTIFIERS.USER_VIEW, { userId: user.id })">
+      <h5>{{ user.name }}</h5>
+      <p>{{ user.email }}</p>
+    </a>
+  </div>
+</app-list-wrapper>
