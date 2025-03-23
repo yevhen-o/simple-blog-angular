@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>List of articles</h1>
+  <app-list-wrapper *ngIf="!isLoading && !error">
+    <app-blog-item *ngFor="let post of posts" [item]="post"></app-blog-item>
+  </app-list-wrapper>
+  <div *ngIf="isLoading">Loading...</div>
+  <div *ngIf="error">{{ error }}</div>
+</div>

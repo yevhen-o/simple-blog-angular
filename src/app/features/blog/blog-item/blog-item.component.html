@@ -1,0 +1,19 @@
+<div class="blog-item__wrapper">
+  <a
+    [routerLink]="getUrl(IDENTIFIERS.BLOG_VIEW, { slug: item.slug })"
+    class="router-link"
+  >
+    <div class="blog-item__image-wrapper" *ngIf="item.image_url">
+      <img [src]="item.image_url" [alt]="item.title" />
+    </div>
+    <div class="blog-item__content-wrapper">
+      <h2>{{ item.title }}</h2>
+      <div class="blog-item__bottom-line">
+        <app-tag-list [tags]="item.tags"></app-tag-list>
+        <small>
+          Author: {{ item.author.first_name }} {{ item.author.last_name }}
+        </small>
+      </div>
+    </div>
+  </a>
+</div>

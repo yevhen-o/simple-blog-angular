@@ -1,17 +1,30 @@
 <div class="app-layout">
-  <header class="app-header">
-    <div class="logo">My Blog</div>
+  <div class="top-navigation__wrapper">
     <nav>
-      <ul>
-        <li><a routerLink="/first-component">First</a></li>
-        <li><a routerLink="/second-component">Second</a></li>
-      </ul>
+      <a href="/" class="logo">
+        <img src="/favicon.ico" alt="My Blog Logo" class="logo__img" />
+      </a>
+      <ng-container *ngFor="let item of items">
+        <a
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [class]="item.className"
+          >{{ item.title }}</a
+        >
+      </ng-container>
+      <!-- <UserMenu /> -->
     </nav>
-  </header>
-  <main class="app-main">
+  </div>
+  <main class="content__wrapper">
     <router-outlet />
   </main>
-  <footer class="app-footer">
-    <p>&copy; {{ currentYear }} My Blog</p>
+  <footer class="footer">
+    <div class="footer__content">
+      <p class="footer__copyright">
+        &copy; {{ currentYear }} My Blog. All rights reserved.
+      </p>
+      <p class="footer__text">Made with ❤️ by Yevhen.</p>
+    </div>
   </footer>
 </div>

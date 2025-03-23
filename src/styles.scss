@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+$color-primary: rgb(0, 109, 255);
+$color-green: rgb(0, 169, 28);
+$color-yellow: rgba(255, 98, 0, 1);
+$color-red: rgba(204, 20, 38, 1);
+$color-purple: rgba(155, 60, 171, 1);
+$color-error: rgba(204, 20, 38, 1);
+$color-gray-100: rgba(1, 1, 1, 1);
+$color-gray-75: rgba(102, 102, 102, 1);
+$color-gray-50: rgba(170, 170, 170, 1);
+$color-gray-25: rgba(235, 235, 235, 1);
+$color-gray-0: rgba(255, 255, 255, 1);
+
+:root {
+  --spacer-xl: 2rem;
+  --spacer-lg: 1.5rem;
+  --spacer-gn: 1.25rem;
+  --spacer-df: 1rem;
+  --spacer-sm: 0.5rem;
+  --spacer-xs: 0.25rem;
+
+  --color-primary: #{$color-primary};
+  --color-green: #{$color-green};
+  --color-yellow: #{$color-yellow};
+  --color-red: #{$color-red};
+  --color-purple: #{$color-purple};
+  --color-gray-100: #{$color-gray-100};
+  --color-gray-75: #{$color-gray-75};
+  --color-gray-50: #{$color-gray-50};
+  --color-gray-25: #{$color-gray-25};
+  --color-gray-0: #{$color-gray-0};
+  --border-style: 1px solid rgba(36, 41, 46, 0.12);
+  --nice-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --nice-shadow-hover: 0px 4px 8px rgba(0, 0, 0, 0.15);
+
+  --primary-background: #fff;
+  --primary-text-color: #000;
+
+  --border-radius-sm: .25rem;
+  --border-radius-df: .5rem;
+  --border-radius-lg: 1rem;
+
+  --header-height: 64px;
+  --footer-height: 90px;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.content__wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 var(--spacer-df);
+}

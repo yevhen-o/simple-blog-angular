@@ -1,0 +1,9 @@
+.tags-list__wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-sm);
+
+  &>h5 {
+    margin: 0;
+  }
+}
