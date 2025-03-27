@@ -1,0 +1,31 @@
+<app-portal>
+  <div #modalWrapper class="overlay" (click)="handleOverlayClick($event)"></div>
+  <div class="modal__wrapper">
+    <div class="modal__container">
+      <div class="">
+        <div class="modal__header">
+          <h3 class="modal__title">{{ title }}</h3>
+          <app-button
+            *ngIf="hasCloseButton"
+            (click)="onClose.emit()"
+            class="modal__close"
+            data-modal-hide="default-modal"
+          >
+            Close
+          </app-button>
+        </div>
+        <div class="modal__content">
+          <ng-content></ng-content>
+        </div>
+        <div
+          *ngIf="actions"
+          class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+        >
+          <app-button *ngFor="let action of actions" (click)="action.onClick()">
+            {{ action.title }}
+          </app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-portal>

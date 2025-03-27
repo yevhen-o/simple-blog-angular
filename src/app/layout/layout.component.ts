@@ -2,11 +2,18 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { getUrl, IDENTIFIERS } from '../utils';
+import { UserMenuComponent } from '../features/authentication/user-menu/user-menu.component';
 
 @Component({
   selector: 'app-layout',
-  standalone: true, // Make it standalone
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive], // Import CommonModule and RouterOutlet
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    UserMenuComponent,
+  ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })

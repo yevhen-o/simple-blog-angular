@@ -1,0 +1,41 @@
+.button {
+  border: none;
+  outline: none;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius-lg);
+  font-weight: 700;
+  color: var(--color-gray-0);
+  background: linear-gradient(110.46deg, #9ba1a6 12.27%, #68696b 93.92%);
+
+  &:hover {
+    background: linear-gradient(110.46deg, #6f7172 12.27%, #454546 93.92%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    background: linear-gradient(110.46deg, #70C3FF 12.27%, #4B65FF 93.92%);
+
+    &:hover {
+      background: linear-gradient(110.46deg, #64baf7 12.27%, #3d58f4 93.92%);
+    }
+  }
+
+  &--flat {
+    background: transparent;
+    color: var(--color-gray-100);
+    font-weight: normal;
+
+    &:hover {
+      background: linear-gradient(110.46deg, #d9e2e8 12.27%, #c2c3c8 93.92%);
+    }
+  }
+}

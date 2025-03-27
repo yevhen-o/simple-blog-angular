@@ -1,0 +1,16 @@
+<button
+  [id]="id"
+  [type]="type"
+  (click)="handleClick($event)"
+  [disabled]="disabled"
+  [attr.aria-label]="ariaLabel"
+  [ngClass]="{
+    button: true,
+    'button--primary': isPrimary,
+    'button--flat': isFlat
+  }"
+  [class]="className ?? ''"
+  [style]="style"
+>
+  <ng-content></ng-content>
+</button>

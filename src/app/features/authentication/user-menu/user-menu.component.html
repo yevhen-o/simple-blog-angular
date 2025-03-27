@@ -1,0 +1,7 @@
+<div>
+  <app-button (click)="showAuthModal = true">Login</app-button>
+  <app-auth-modal
+    *ngIf="showAuthModal"
+    (close)="showAuthModal = false"
+  ></app-auth-modal>
+</div>
