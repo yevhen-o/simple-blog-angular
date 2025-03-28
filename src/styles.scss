@@ -59,3 +59,24 @@ body {
   margin: 0 auto;
   padding: 0 var(--spacer-df);
 }
+ng-icon {
+  &.icon-lg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  &.icon-xl {
+    width: 48px;
+    height: 48px;
+  }
+
+  &.icon-md {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.icon-sm {
+    width: 16px;
+    height: 16px;
+  }
+}

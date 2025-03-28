@@ -12,14 +12,17 @@ import {
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { PortalComponent } from '../portal/portal.component';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { matClose } from '@ng-icons/material-icons/baseline';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, PortalComponent],
+  imports: [CommonModule, ButtonComponent, PortalComponent, NgIcon],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideIcons({ matClose })],
 })
 export class ModalComponent implements AfterViewInit, OnDestroy {
   @Input() title: string = '';

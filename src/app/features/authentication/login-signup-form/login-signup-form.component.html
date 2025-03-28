@@ -1,1 +1,58 @@
-<p>login-signup-form works!</p>
+<div class="post-form__wrapper" style="min-width: 330px">
+  <h2>{{ isLogin ? "Login" : "Sign Up" }}</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Your email"
+          formControlName="email"
+        />
+        <div
+          *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+          class="error-message"
+        >
+          <div *ngIf="email?.errors?.['required']">Email is required.</div>
+          <div *ngIf="email?.errors?.['email']">
+            Email must be a valid email address.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Your password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+          class="error-message"
+        >
+          <div *ngIf="password?.errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="password?.errors?.['minlength']">
+            Password must be at least 6 characters long
+          </div>
+        </div>
+      </div>
+
+      <app-button
+        type="submit"
+        class="post-form__button"
+        [disabled]="isSubmitting"
+      >
+        {{ isSubmitting ? "Submitting" : isLogin ? "Login" : "Sign Up" }}
+      </app-button>
+      <app-button *ngIf="isDirty" (click)="resetForm()">Reset</app-button>
+    </div>
+  </form>
+  <div class="post-form__switch">
+    <app-button (click)="toggleMode()" [isFlat]="true">
+      <span *ngIf="isLogin">Switch to Sign Up</span>
+      <span *ngIf="!isLogin">Switch to login</span>
+    </app-button>
+  </div>
+</div>

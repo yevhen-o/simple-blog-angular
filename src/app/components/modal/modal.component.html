@@ -7,11 +7,12 @@
           <h3 class="modal__title">{{ title }}</h3>
           <app-button
             *ngIf="hasCloseButton"
+            [isFlat]="true"
+            [isRounded]="true"
             (click)="onClose.emit()"
-            class="modal__close"
             data-modal-hide="default-modal"
           >
-            Close
+            <ng-icon name="matClose">matClose</ng-icon>
           </app-button>
         </div>
         <div class="modal__content">

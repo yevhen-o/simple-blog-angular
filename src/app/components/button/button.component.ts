@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -21,13 +15,8 @@ export class ButtonComponent {
   @Input() disabled: boolean = false;
   @Input() isPrimary: boolean = false;
   @Input() isFlat: boolean = false;
+  @Input() isRounded: boolean = false;
   @Input() className?: string;
   @Input() style?: { [key: string]: string };
   @Input() ariaLabel?: string;
-
-  @Output() click = new EventEmitter<MouseEvent>();
-
-  handleClick(event: MouseEvent) {
-    this.click.emit(event);
-  }
 }

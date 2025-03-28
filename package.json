@@ -26,6 +26,8 @@
     "@angular/platform-server": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@angular/ssr": "^19.2.3",
+    "@ng-icons/core": "^31.2.0",
+    "@ng-icons/material-icons": "^31.2.0",
     "@supabase/supabase-js": "^2.49.1",
     "classnames": "^2.5.1",
     "dotenv": "^16.4.7",
