@@ -1,72 +1,26 @@
 <div class="post-form__wrapper" style="min-width: 330px">
   <h2>{{ isLogin ? "Login" : "Sign Up" }}</h2>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div>
-      <app-input-field
-        label="Email"
-        id="email"
-        name="email"
-        type="email"
-        formControlName="email"
-        errors="form.get('email')?.errors"
-        ariaLabel="Email field"
-        placeholder="some@mail.com"
-      ></app-input-field>
-      <app-input-field
-        label="Password"
-        id="password"
-        name="password"
-        type="password"
-        formControlName="password"
-        errors="form.get('password')?.errors"
-        ariaLabel="Password field"
-      ></app-input-field>
-      <!-- <div class="form-group">
-        <input
-          type="email"
-          class="form-control"
-          placeholder="Your email"
-          formControlName="email"
-        />
-        <div
-          *ngIf="email?.invalid && (email?.dirty || email?.touched)"
-          class="error-message"
-        >
-          <div *ngIf="email?.errors?.['required']">Email is required.</div>
-          <div *ngIf="email?.errors?.['email']">
-            Email must be a valid email address.
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="form-group">
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Your password"
-          formControlName="password"
-        />
-        <div
-          *ngIf="password?.invalid && (password?.dirty || password?.touched)"
-          class="error-message"
-        >
-          <div *ngIf="password?.errors?.['required']">
-            Password is required.
-          </div>
-          <div *ngIf="password?.errors?.['minlength']">
-            Password must be at least 6 characters long
-          </div>
-        </div>
-      </div> -->
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <app-controller
+      label="Email"
+      name="email"
+      [validation]="emailValidation"
+    ></app-controller>
 
-      <app-button
-        type="submit"
-        class="post-form__button"
-        [disabled]="isSubmitting"
-      >
-        {{ isSubmitting ? "Submitting" : isLogin ? "Login" : "Sign Up" }}
-      </app-button>
-      <app-button *ngIf="isDirty" (click)="resetForm()">Reset</app-button>
-    </div>
+    <app-controller
+      label="Password"
+      name="password"
+      [validation]="passwordValidation"
+    ></app-controller>
+
+    <app-button
+      type="submit"
+      class="post-form__button"
+      [disabled]="isSubmitting"
+    >
+      {{ isSubmitting ? "Submitting" : isLogin ? "Login" : "Sign Up" }}
+    </app-button>
+    <app-button *ngIf="isDirty" (click)="resetForm()">Reset</app-button>
   </form>
   <div class="post-form__switch">
     <app-button (click)="toggleMode()" [isFlat]="true">

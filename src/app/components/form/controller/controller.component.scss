@@ -1,0 +1,33 @@
+.invalid-text {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-red);
+  padding-bottom: var(--spacer-sm);
+
+  &--has-space {
+    padding: var(--spacer-xs) var(--spacer-sm);
+  }
+}
+
+.input_field {
+  display: flex;
+  flex-direction: column;
+  min-height: 90px;
+
+  input,
+  textarea {
+    all: unset;
+    width: 100%;
+    padding: 0.9rem 1.25rem;
+    border: 1px solid var(--color-gray-25);
+    border-radius: var(--border-radius-df);
+    background: var(--color-gray-0);
+    color: var(--color-gray-100);
+    box-sizing: border-box;
+    transition: var(--transition-df);
+
+    &:focus {
+      border-color: var(--color--focus);
+    }
+  }
+}

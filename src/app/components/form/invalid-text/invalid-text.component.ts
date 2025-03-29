@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
 const VALIDATION_MESSAGES = {
@@ -37,12 +37,15 @@ function getValidationMessage(
   templateUrl: './invalid-text.component.html',
   styleUrl: './invalid-text.component.scss',
 })
-export class InvalidTextComponent {
+export class InvalidTextComponent implements OnChanges {
   @Input() hasSpace?: boolean;
-  @Input() errors: ValidationErrors | null = null;
+  @Input() errors: ValidationErrors | null | undefined = null;
+  errorMessage: string | null = null;
 
-  get errorMessage(): string | null {
-    console.log('Errors:', this.errors);
-    return getValidationMessage(this.errors);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['errors']) {
+      console.log('Errors:', this.errors);
+      this.errorMessage = getValidationMessage(this.errors);
+    }
   }
 }

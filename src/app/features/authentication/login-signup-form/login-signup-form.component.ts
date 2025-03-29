@@ -1,14 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
-  AbstractControl,
   ReactiveFormsModule,
+  ValidatorFn,
 } from '@angular/forms';
 import { ButtonComponent } from '@src/app/components/button/button.component';
-import { InputFieldComponent } from '@src/app/components/form/input-field/input-field.component';
+import { ControllerComponent } from '@src/app/components/form/controller/controller.component';
+import { AuthService, type AuthState } from '@src/app/services/authService';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,78 +26,59 @@ import { Subscription } from 'rxjs';
     ButtonComponent,
     ReactiveFormsModule,
     CommonModule,
-    InputFieldComponent,
+    ControllerComponent,
   ],
 })
-export class LoginSignupFormComponent implements OnInit {
-  @Output() onAuthenticate = new EventEmitter<void>();
-  isLogin = true;
-  form!: FormGroup;
-  isSubmitting = false;
-  isDirty = false;
-  private passwordSubscription: Subscription | undefined;
+export class LoginSignupFormComponent {
+  authState: AuthState | null = null;
+  private authSubscription: Subscription | undefined;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-
-    // Subscribe to password value changes
-    this.passwordSubscription = this.password?.valueChanges.subscribe(() => {
-      console.log('Password Errors:', this.password?.errors);
+    this.authSubscription = this.authService.authState$.subscribe((state) => {
+      this.authState = state;
     });
   }
 
-  buildForm(): void {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-    this.form.valueChanges.subscribe(() => {
-      this.isDirty = true;
-    });
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 
-  get email(): AbstractControl | null {
-    return this.form.get('email');
-  }
+  @Output() onAuthenticate = new EventEmitter<void>();
+  isLogin = true;
+  isSubmitting = false;
+  isDirty = false;
+  passwordErrors: any;
+  emailErrors: any;
 
-  get password(): AbstractControl | null {
-    return this.form.get('password');
-  }
+  form = new FormGroup({});
+  emailValidation: ValidatorFn[] = [Validators.required, Validators.email];
+  passwordValidation: ValidatorFn[] = [
+    Validators.required,
+    Validators.minLength(6),
+  ];
 
-  onSubmit(): void {
+  submit() {
+    // do whatever you need with it...
     if (this.form.invalid) {
-      this.form.markAllAsTouched();
+      console.error('Form is invalid');
       return;
     }
+    const formData = this.form.value as { email: string; password: string };
 
-    this.isSubmitting = true;
-    const { email, password } = this.form.value;
-
-    console.log('Form submitted:', this.form.value);
-
-    // const authPromise = this.isLogin
-    //   ? this.authService.login(email, password)
-    //   : this.authService.signup(email, password);
-
-    // authPromise
-    //   .then(() => {
-    //     this.onAuthenticate.emit();
-    //   })
-    //   .catch((error) => {
-    //     alert(error.message);
-    //   })
-    //   .finally(() => {
-    //     this.isSubmitting = false;
-    //   });
+    if (this.isLogin) {
+      this.authService.login(formData.email, formData.password).subscribe();
+    } else {
+      this.authService.signUp(formData.email, formData.password).subscribe();
+    }
+    this.form.reset();
+    this.onAuthenticate.emit();
   }
 
   toggleMode(): void {
-    console.log('toggleMode');
     this.isLogin = !this.isLogin;
     this.form.reset();
     this.isDirty = false;

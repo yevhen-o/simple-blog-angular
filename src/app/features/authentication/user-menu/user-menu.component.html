@@ -1,7 +1,15 @@
-<div>
+<!-- user-menu.component.html -->
+<ng-container *ngIf="!authState?.user">
   <app-button (click)="showAuthModal = true">Login</app-button>
-  <app-auth-modal
-    *ngIf="showAuthModal"
-    (close)="showAuthModal = false"
-  ></app-auth-modal>
-</div>
+</ng-container>
+
+<ng-container *ngIf="authState?.user">
+  <app-button (click)="logOut()"
+    >{{ authState?.user?.email }} Logout</app-button
+  >
+</ng-container>
+
+<app-auth-modal
+  *ngIf="showAuthModal"
+  (close)="showAuthModal = false"
+></app-auth-modal>

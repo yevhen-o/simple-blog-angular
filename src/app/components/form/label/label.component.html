@@ -7,6 +7,6 @@
   }"
   [for]="htmlFor"
 >
-  {{ label }}
+  <ng-content></ng-content>
   <span *ngIf="required" class="required">*</span>
 </label>

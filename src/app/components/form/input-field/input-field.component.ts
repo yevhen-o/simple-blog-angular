@@ -1,29 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InvalidTextComponent } from '../invalid-text/invalid-text.component';
+import { Component, Input, inject } from '@angular/core';
+import {
+  ControlContainer,
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { LabelComponent } from '../label/label.component';
 
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
-  imports: [CommonModule, InvalidTextComponent, LabelComponent],
+  imports: [CommonModule, LabelComponent, ReactiveFormsModule],
   providers: [
     {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputFieldComponent),
-      multi: true,
+      provide: ControlContainer,
+      useFactory: () => inject(ControlContainer, { skipSelf: true }),
     },
   ],
 })
 export class InputFieldComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() id: string = '';
-  @Input() name: string = '';
+  @Input({ required: true }) name: string = '';
   @Input() type: string = 'text';
   @Input() rows: string = '1';
-  @Input() errors: any | null = null;
   @Input() ariaLabel: string = '';
   @Input() ariaDescribedby: string = '';
   @Input() ariaInvalid: string | null = null;
@@ -32,10 +35,18 @@ export class InputFieldComponent implements ControlValueAccessor {
   @Input() readonly: boolean = false;
   @Input() placeholder: string = '';
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['errors']) {
-      console.log('InputFieldComponent - Errors changed:', this.errors);
-    }
+  parentContainer = inject(ControlContainer);
+
+  get parentFormGroup() {
+    return this.parentContainer.control as FormGroup;
+  }
+
+  ngOnInit() {
+    this.parentFormGroup.addControl(this.name, new FormControl(''));
+  }
+
+  ngOnDestroy() {
+    this.parentFormGroup.removeControl(this.name);
   }
 
   isFocused: boolean = false;
