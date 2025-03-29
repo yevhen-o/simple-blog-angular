@@ -2,7 +2,26 @@
   <h2>{{ isLogin ? "Login" : "Sign Up" }}</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
-      <div class="form-group">
+      <app-input-field
+        label="Email"
+        id="email"
+        name="email"
+        type="email"
+        formControlName="email"
+        errors="form.get('email')?.errors"
+        ariaLabel="Email field"
+        placeholder="some@mail.com"
+      ></app-input-field>
+      <app-input-field
+        label="Password"
+        id="password"
+        name="password"
+        type="password"
+        formControlName="password"
+        errors="form.get('password')?.errors"
+        ariaLabel="Password field"
+      ></app-input-field>
+      <!-- <div class="form-group">
         <input
           type="email"
           class="form-control"
@@ -18,8 +37,8 @@
             Email must be a valid email address.
           </div>
         </div>
-      </div>
-      <div class="form-group">
+      </div> -->
+      <!-- <div class="form-group">
         <input
           type="password"
           class="form-control"
@@ -37,7 +56,7 @@
             Password must be at least 6 characters long
           </div>
         </div>
-      </div>
+      </div> -->
 
       <app-button
         type="submit"

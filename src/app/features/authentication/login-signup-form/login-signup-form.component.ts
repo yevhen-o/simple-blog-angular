@@ -8,12 +8,19 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ButtonComponent } from '@src/app/components/button/button.component';
+import { InputFieldComponent } from '@src/app/components/form/input-field/input-field.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-signup-form',
   templateUrl: './login-signup-form.component.html',
   styleUrl: './login-signup-form.component.scss',
-  imports: [ButtonComponent, ReactiveFormsModule, CommonModule],
+  imports: [
+    ButtonComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    InputFieldComponent,
+  ],
 })
 export class LoginSignupFormComponent implements OnInit {
   @Output() onAuthenticate = new EventEmitter<void>();
@@ -21,11 +28,20 @@ export class LoginSignupFormComponent implements OnInit {
   form!: FormGroup;
   isSubmitting = false;
   isDirty = false;
+  private passwordSubscription: Subscription | undefined;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.buildForm();
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+
+    // Subscribe to password value changes
+    this.passwordSubscription = this.password?.valueChanges.subscribe(() => {
+      console.log('Password Errors:', this.password?.errors);
+    });
   }
 
   buildForm(): void {
@@ -54,6 +70,8 @@ export class LoginSignupFormComponent implements OnInit {
 
     this.isSubmitting = true;
     const { email, password } = this.form.value;
+
+    console.log('Form submitted:', this.form.value);
 
     // const authPromise = this.isLogin
     //   ? this.authService.login(email, password)

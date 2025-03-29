@@ -1,0 +1,12 @@
+<label
+  class="custom-label"
+  [ngClass]="{
+    'custom-label--in-field': isInField,
+    'custom-label--filled': isFilled,
+    'custom-label--focused': isFocused
+  }"
+  [for]="htmlFor"
+>
+  {{ label }}
+  <span *ngIf="required" class="required">*</span>
+</label>
