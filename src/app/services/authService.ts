@@ -125,7 +125,6 @@ export class AuthService implements OnDestroy {
     return from(sb.auth.getSession()).pipe(
       switchMap((session) => {
         const user = session.data.session?.user ?? null;
-        console.log('User:', user);
         this.setAuthState({ user });
         return user ? this.checkIsAuthor(user.id) : of(false);
       }),

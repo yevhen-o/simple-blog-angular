@@ -3,6 +3,7 @@ import { makeStateKey, TransferState } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 import { supabase } from './supabase';
 import { PostInterface } from '@src/app/types/PostInterface';
+import { uploadImage } from './image.service';
 
 const BLOG_POSTS_KEY = makeStateKey<PostInterface[]>('blogPosts');
 
@@ -89,18 +90,17 @@ export class BlogService {
     }
   ) {
     if (data.image) {
-      //move to image service
-      //const imageUrl = await uploadImage(data.image);
-      //if (imageUrl) {
-      //  data.image_url = imageUrl;
-      //}
+      const imageUrl = await uploadImage(data.image);
+      if (imageUrl) {
+        data.image_url = imageUrl;
+      }
     }
     delete data.image;
-    console.log('data', data);
     const { data: result } = await supabase
       .from('blog-posts')
       .insert([data])
       .select();
     return result;
+    return null;
   }
 }

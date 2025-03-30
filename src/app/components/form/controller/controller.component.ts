@@ -35,7 +35,6 @@ import { CommonModule } from '@angular/common';
       </app-label>
       <input
         *ngIf="rows === 1"
-        [disabled]="disabled"
         [placeholder]="placeholder"
         [formControlName]="name"
         [type]="type"
@@ -44,7 +43,6 @@ import { CommonModule } from '@angular/common';
       />
       <textarea
         *ngIf="rows !== 1"
-        [disabled]="disabled"
         [placeholder]="placeholder"
         [formControlName]="name"
         [rows]="rows"
@@ -95,7 +93,7 @@ export class ControllerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.parentFormGroup.addControl(
       this.name,
-      new FormControl('', this.validation)
+      new FormControl({ value: '', disabled: this.disabled }, this.validation)
     );
   }
   ngOnDestroy() {

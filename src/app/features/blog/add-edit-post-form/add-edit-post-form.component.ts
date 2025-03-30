@@ -6,12 +6,14 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ButtonComponent } from '@src/app/components/button/button.component';
 import { ControllerComponent } from '@src/app/components/form/controller/controller.component';
+import { UploadFieldComponent } from '@src/app/components/form/upload-field/upload-field.component';
 import { AuthService, AuthState } from '@src/app/services/authService';
 import { BlogService } from '@src/app/services/blog.service';
 import { PostInterface } from '@src/app/types/PostInterface';
-import { titleToSlug } from '@src/app/utils';
+import { getUrl, IDENTIFIERS, titleToSlug } from '@src/app/utils';
 import { Subscription } from 'rxjs';
 
 type FormData = Pick<PostInterface, 'title' | 'content' | 'slug'> & {
@@ -25,6 +27,7 @@ type FormData = Pick<PostInterface, 'title' | 'content' | 'slug'> & {
     ReactiveFormsModule,
     CommonModule,
     ControllerComponent,
+    UploadFieldComponent,
   ],
   templateUrl: './add-edit-post-form.component.html',
   styleUrl: './add-edit-post-form.component.scss',
@@ -35,6 +38,8 @@ export class AddEditPostFormComponent {
   blogService = inject(BlogService);
   hasCustomSlug = false;
   isSlugInUse = false;
+  private router = inject(Router);
+  private image: File | null = null;
 
   constructor(private authService: AuthService) {}
 
@@ -90,27 +95,33 @@ export class AddEditPostFormComponent {
     }
   }
 
-  submit() {
+  async submit() {
     // do whatever you need with it...
     if (this.form.invalid) {
-      console.error('Form is invalid');
       this.form.markAllAsTouched();
       return;
     }
     this.isSubmitting = true;
     const formData = this.form.value as FormData;
 
-    this.blogService.postNewBlog({
+    await this.blogService.postNewBlog({
       ...formData,
+      image: this.image,
       tags: formData.tags.split(' ').map((tag) => tag.trim()),
       author_id: this.authState!.user!.id,
     });
     this.isSubmitting = false;
     this.form.reset();
+
+    this.router.navigate([getUrl(IDENTIFIERS.BLOG)]);
   }
 
   resetForm(): void {
     this.form.reset();
     this.isDirty = false;
+  }
+
+  fileChanged(file: File | null): void {
+    this.image = file;
   }
 }

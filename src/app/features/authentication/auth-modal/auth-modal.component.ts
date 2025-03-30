@@ -16,8 +16,6 @@ export class AuthModalComponent {
   }
 
   onAuthenticate(): void {
-    // Add your authentication logic here
-    console.log('Authentication successful!');
     this.close.emit();
   }
 }

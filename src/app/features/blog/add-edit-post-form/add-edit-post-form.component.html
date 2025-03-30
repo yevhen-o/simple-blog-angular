@@ -1,4 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
+  <app-upload-field
+    label="Image"
+    name="image"
+    (fileChanged)="fileChanged($event)"
+  ></app-upload-field>
   <app-controller
     label="Title"
     name="title"

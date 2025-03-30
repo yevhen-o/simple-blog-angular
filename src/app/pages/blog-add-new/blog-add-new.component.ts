@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { UserMenuComponent } from '@src/app/features/authentication/user-menu/user-menu.component';
-import { AddEditPostFormComponent } from '@src/app/features/bllog/add-edit-post-form/add-edit-post-form.component';
+import { AddEditPostFormComponent } from '@src/app/features/blog/add-edit-post-form/add-edit-post-form.component';
 import { AuthService, AuthState } from '@src/app/services/authService';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +19,6 @@ export class BlogAddNewComponent {
 
   ngOnInit(): void {
     this.authSubscription = this.authService.authState$.subscribe((state) => {
-      console.log('Auth state changed:', state);
       this.authState = state;
     });
   }
