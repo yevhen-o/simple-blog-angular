@@ -1,7 +1,7 @@
 {
   "rewrites": [
     { "source": "/blog", "destination": "/" },
-    { "source": "/blog/**", "destination": "/" }
+    { "source": "/blog/**", "destination": "/" },
     { "source": "/users", "destination": "/" },
     { "source": "/users/**", "destination": "/" }
   ]
