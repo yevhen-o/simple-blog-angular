@@ -1,27 +1,26 @@
 const fs = require("fs");
 const path = require("path");
-const dotenv = require("dotenv");
+const successColor = "\x1b[32m%s\x1b[0m";
+const checkSign = "\u{2705}";
+const dotenv = require("dotenv").config({ path: "./.env" });
 
-const envPath = path.resolve(__dirname, ".env");
-const envConfig = dotenv.parse(fs.readFileSync(envPath));
+const envFile = `export const environment = {
+    VITE_SUPABASE_URL: '${process.env.VITE_SUPABASE_URL}',
+    VITE_SUPABASE_KEY: '${process.env.VITE_SUPABASE_KEY}',
+};
+`;
 
-const environmentFiles = [
-  path.resolve(__dirname, "src/environments/environment.ts"),
-  path.resolve(__dirname, "src/environments/environment.prod.ts"),
-];
+console.log(envFile);
 
-environmentFiles.forEach((file) => {
-  let fileContent = fs.readFileSync(file, "utf8");
-  Object.keys(envConfig).forEach((key) => {
-    const regex = new RegExp(`(supabaseUrl|supabaseKey):\\s*'"['"]`, "g");
-    fileContent = fileContent.replace(regex, (match, p1) => {
-      if (p1 === "supabaseUrl") {
-        return `supabaseUrl: '${envConfig.VITE_SUPABASE_URL}'`;
-      } else if (p1 === "supabaseKey") {
-        return `supabaseKey: '${envConfig.VITE_SUPABASE_KEY}'`;
-      }
-      return match;
-    });
-  });
-  fs.writeFileSync(file, fileContent);
+const targetPath = path.join(__dirname, "./src/environments/environment.ts");
+fs.writeFile(targetPath, envFile, (err) => {
+  if (err) {
+    console.error(err);
+    throw err;
+  } else {
+    console.log(
+      successColor,
+      `${checkSign} Successfully generated environment.ts`
+    );
+  }
 });

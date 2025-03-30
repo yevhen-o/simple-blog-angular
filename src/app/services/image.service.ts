@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
 import { environment } from '@src/environments/environment';
 
-const supabaseUrl = environment.supabaseUrl;
+const supabaseUrl = environment.VITE_SUPABASE_URL;
 
 export const uploadImage = async (file: File): Promise<string | null> => {
   const fileName = `${Date.now()}-${file.name}`;

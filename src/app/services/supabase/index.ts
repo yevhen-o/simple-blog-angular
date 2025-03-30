@@ -2,8 +2,8 @@ import { createClient } from '@supabase/supabase-js';
 import { environment } from '@src/environments/environment';
 
 // Access environment variables from the environment file
-const supabaseUrl = environment.supabaseUrl;
-const supabaseKey = environment.supabaseKey;
+const supabaseUrl = environment.VITE_SUPABASE_URL;
+const supabaseKey = environment.VITE_SUPABASE_KEY;
 
 // Check if environment variables are defined
 if (!supabaseUrl) {
