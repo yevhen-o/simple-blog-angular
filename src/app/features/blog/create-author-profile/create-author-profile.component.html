@@ -5,30 +5,21 @@
     (fileChanged)="fileChanged($event)"
   ></app-upload-field>
   <app-controller
-    label="Title"
-    name="title"
-    [validation]="titleValidation"
-    (blur)="blurHandler()"
+    label="First name"
+    name="first_name"
+    [validation]="fieldValidation"
   ></app-controller>
 
   <app-controller
-    label="Slug"
-    name="slug"
-    [validation]="slugValidation"
-    (blur)="blurHandler()"
+    label="Last name"
+    name="last_name"
+    [validation]="fieldValidation"
   ></app-controller>
 
   <app-controller
-    label="Content"
-    name="content"
+    label="Short biography"
+    name="short_bio"
     [rows]="5"
-    [validation]="contentValidation"
-  ></app-controller>
-
-  <app-controller
-    label="Tags"
-    name="tags"
-    [validation]="tagsValidation"
   ></app-controller>
 
   <app-button type="submit" class="post-form__button" [disabled]="isSubmitting">

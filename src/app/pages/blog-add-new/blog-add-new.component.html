@@ -8,7 +8,7 @@
   <ng-container *ngIf="!authState?.isAuthor">
     <h1>Create author profile</h1>
     <p>To add a new post, you should have author profile.</p>
-    <p>Create author profile form</p>
+    <app-create-author-profile></app-create-author-profile>
   </ng-container>
   <ng-container *ngIf="authState?.isAuthor">
     <h1>Add new post</h1>

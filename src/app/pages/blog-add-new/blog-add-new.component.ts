@@ -2,12 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { UserMenuComponent } from '@src/app/features/authentication/user-menu/user-menu.component';
 import { AddEditPostFormComponent } from '@src/app/features/blog/add-edit-post-form/add-edit-post-form.component';
+import { CreateAuthorProfileComponent } from '@src/app/features/blog/create-author-profile/create-author-profile.component';
 import { AuthService, AuthState } from '@src/app/services/authService';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-blog-add-new',
-  imports: [UserMenuComponent, CommonModule, AddEditPostFormComponent],
+  imports: [
+    UserMenuComponent,
+    CommonModule,
+    AddEditPostFormComponent,
+    CreateAuthorProfileComponent,
+  ],
   templateUrl: './blog-add-new.component.html',
   styleUrl: './blog-add-new.component.scss',
 })
