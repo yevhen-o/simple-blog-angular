@@ -1,0 +1,17 @@
+<ng-container *ngIf="!authState?.user">
+  <h1>Add new post</h1>
+  <p>To add a new post, please log in.</p>
+  <app-user-menu></app-user-menu>
+</ng-container>
+
+<ng-container *ngIf="authState?.user">
+  <ng-container *ngIf="!authState?.isAuthor">
+    <h1>Create author profile</h1>
+    <p>To add a new post, you should have author profile.</p>
+    <p>Create author profile form</p>
+  </ng-container>
+  <ng-container *ngIf="authState?.isAuthor">
+    <h1>Add new post</h1>
+    <app-add-edit-post-form></app-add-edit-post-form>
+  </ng-container>
+</ng-container>

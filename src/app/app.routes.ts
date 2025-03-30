@@ -12,6 +12,7 @@ import {
   UserViewComponent,
 } from './pages/user-view/user-view.component';
 import { UserAddNewComponent } from './pages/user-add-new/user-add-new.component';
+import { BlogAddNewComponent } from './pages/blog-add-new/blog-add-new.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
         path: 'blog',
         component: BlogComponent,
         resolve: { posts: resolveBlogPosts },
+      },
+      {
+        path: 'blog/add-new',
+        component: BlogAddNewComponent,
       },
       {
         path: 'blog/:slug',

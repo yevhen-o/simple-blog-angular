@@ -30,4 +30,8 @@
       border-color: var(--color--focus);
     }
   }
+
+  &.textarea {
+    padding-bottom: 1.5rem;  
+  }
 }

@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <app-controller
+    label="Title"
+    name="title"
+    [validation]="titleValidation"
+    (blur)="blurHandler()"
+  ></app-controller>
+
+  <app-controller
+    label="Slug"
+    name="slug"
+    [validation]="slugValidation"
+    (blur)="blurHandler()"
+  ></app-controller>
+
+  <app-controller
+    label="Content"
+    name="content"
+    [rows]="5"
+    [validation]="contentValidation"
+  ></app-controller>
+
+  <app-controller
+    label="Tags"
+    name="tags"
+    [validation]="tagsValidation"
+  ></app-controller>
+
+  <app-button type="submit" class="post-form__button" [disabled]="isSubmitting">
+    {{ isSubmitting ? "Submitting" : "Submit" }}
+  </app-button>
+  <app-button *ngIf="isDirty" (click)="resetForm()">Reset</app-button>
+</form>

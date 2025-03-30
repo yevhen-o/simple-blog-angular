@@ -1,13 +1,6 @@
 import { CommonModule } from '@angular/common';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {
-  Component,
-  Output,
-  EventEmitter,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
-import {
-  FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
@@ -39,6 +32,9 @@ export class LoginSignupFormComponent {
     this.authSubscription = this.authService.authState$.subscribe((state) => {
       this.authState = state;
     });
+    this.form.valueChanges.subscribe(() => {
+      this.isDirty = this.form.dirty;
+    });
   }
 
   ngOnDestroy(): void {
@@ -51,8 +47,6 @@ export class LoginSignupFormComponent {
   isLogin = true;
   isSubmitting = false;
   isDirty = false;
-  passwordErrors: any;
-  emailErrors: any;
 
   form = new FormGroup({});
   emailValidation: ValidatorFn[] = [Validators.required, Validators.email];

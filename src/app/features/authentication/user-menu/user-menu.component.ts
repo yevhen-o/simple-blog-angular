@@ -20,7 +20,6 @@ export class UserMenuComponent {
 
   ngOnInit(): void {
     this.authSubscription = this.authService.authState$.subscribe((state) => {
-      console.log('Auth state changed:', state);
       this.authState = state;
     });
   }

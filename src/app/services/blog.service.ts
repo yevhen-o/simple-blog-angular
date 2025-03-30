@@ -96,7 +96,7 @@ export class BlogService {
       //}
     }
     delete data.image;
-
+    console.log('data', data);
     const { data: result } = await supabase
       .from('blog-posts')
       .insert([data])
