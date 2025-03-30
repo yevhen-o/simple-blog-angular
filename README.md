@@ -1,5 +1,9 @@
 # MyBlogAngular - A Modern Blog Application
 
+## Preview url
+
+https://simple-blog-angular.vercel.app/
+
 This is a modern, feature-rich blog application built using Angular. It allows users to browse blog posts, view individual posts, and potentially search for specific content. The application is designed to be responsive and provide a great user experience.
 
 ## Features
